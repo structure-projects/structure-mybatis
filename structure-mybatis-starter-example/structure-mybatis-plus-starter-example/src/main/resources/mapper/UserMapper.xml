@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.structure.example.mybatisplus.mapper.UserMapper">
+
+    <resultMap id="baseMap" type="cn.structure.example.mybatisplus.pojo.po.User">
+        <id column="id" property="id" />
+        <result column="username" property="username" />
+        <result column="password" property="password" />
+        <result column="is_unexpired" property="unexpired" />
+        <result column="is_enabled" property="enabled" />
+        <result column="is_unlocked" property="unlocked" />
+        <result column="is_deleted" property="deleted" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+    
+    <insert id="insertUser" useGeneratedKeys="true" keyColumn="id" keyProperty="id"
+            parameterType="cn.structure.example.mybatisplus.pojo.po.User">
+        INSERT INTO user
+        <trim prefix ="(" suffix=")" suffixOverrides =",">
+            <if test ='null != username'>
+                username,
+            </if>
+            <if test ='null != password'>
+                password,
+            </if>
+            <if test ='null != createTime'>
+                create_time,
+            </if>
+            <if test ='null != updateTime'>
+                update_time
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test ='null != username'>
+                username,
+            </if>
+            <if test ='null != password'>
+                password,
+            </if>
+            <if test ='null != createTime'>
+                create_time,
+            </if>
+            <if test ='null != updateTime'>
+                update_time
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateUser" parameterType="cn.structure.example.mybatisplus.pojo.po.User">
+        UPDATE user
+        <set>
+            <if test ='null != username'>username = #{username},</if>
+            <if test ='null != password'>password = #{password},</if>
+            <if test ='null != unexpired'>is_unexpired = #{unexpired},</if>
+            <if test ='null != enabled'>is_enabled = #{enabled},</if>
+            <if test ='null != unlocked'>is_unlocked = #{unlocked},</if>
+            <if test ='null != deleted'>is_deleted = #{deleted},</if>
+            <if test ='null != updateTime'>update_time = #{updateTime},</if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <sql id="baseColumnList">
+		id,username,password,is_unexpired,is_enabled,is_unlocked,is_deleted,create_time,update_time
+	</sql>
+
+    <select id="getUserByUsername" parameterType="String" resultMap="baseMap">
+        SELECT <include refid="baseColumnList"/> FROM user WHERE username = #{username}
+    </select>
+
+    <select id="listUserPage" resultMap="baseMap">
+        SELECT <include refid="baseColumnList"/> FROM user
+        <where>
+            <if test="user.username!=null">username like CONCAT(CONCAT('%', #{user.username}), '%')</if>
+        </where>
+        LIMIT #{pageSize} offset #{offset}
+    </select>
+
+</mapper>
