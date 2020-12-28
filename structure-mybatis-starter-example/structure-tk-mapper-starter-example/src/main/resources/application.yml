@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://localhost:3306/user?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+structure:
+  mybatis:
+    plugin:
+      split: true # 开启分表 开启后需要配合@SplitTable 注解对mapper 上进行分表操作
+      over-write: true # 开启分表 开启后需要配合@SplitTable 注解对mapper 上进行分表操作
+      generate-id-type: snowflake # 定义ID生成规则为雪花算法
