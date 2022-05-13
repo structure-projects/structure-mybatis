@@ -29,7 +29,7 @@
         <dependency>
             <groupId>cn.structured</groupId>
             <artifactId>structure-mybatis-starter</artifactId>
-            <version>1.0.1.SNAPSHOT</version>
+            <version>${structure.version}</version>
         </dependency>
     </dependencies>
 
