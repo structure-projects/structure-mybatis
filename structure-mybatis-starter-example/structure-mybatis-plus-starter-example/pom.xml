@@ -35,7 +35,7 @@
             <dependency>
                 <groupId>cn.structured</groupId>
                 <artifactId>structure-dependencies</artifactId>
-                <version>1.0.2.RELEASE</version>
+                <version>${structure.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

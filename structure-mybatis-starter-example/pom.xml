@@ -21,16 +21,32 @@
         <module>structure-mybatis-example</module>
     </modules>
 
+    <properties>
+        <structure.version>1.2.0.RELEASE</structure.version>
+        <spring-boot.version>2.1.2.RELEASE</spring-boot.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <version>${spring-boot.version}</version>
         </dependency>
         <dependency>
             <groupId>cn.structured</groupId>
             <artifactId>structure-mybatis-starter</artifactId>
-            <version>${structure.version}</version>
         </dependency>
     </dependencies>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>cn.structured</groupId>
+                <artifactId>structure-boot-parent</artifactId>
+                <version>${structure.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>
