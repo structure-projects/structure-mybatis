@@ -22,7 +22,7 @@
     </modules>
 
     <properties>
-        <structure.version>1.2.0.RELEASE</structure.version>
+        <structure.version>1.2.1.RELEASE</structure.version>
         <spring-boot.version>2.1.2.RELEASE</spring-boot.version>
     </properties>
 
